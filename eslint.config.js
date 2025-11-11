@@ -1,19 +1,26 @@
-// eslint.config.js（Flat Config形式・2025年最新版）
+// eslint.config.js
+// 🧩 ESLint設定ファイル（HTMLとインラインJSを同時チェック）
+// これ1つでHTMLタグの構文も<script>内のJSもLintできます
 
-import js from "@eslint/js"; // ✅ ESLint公式が提供する基本ルールセット
+import js from "@eslint/js"; // JS標準ルール
+import html from "@html-eslint/eslint-plugin"; // HTMLルール集
+import parser from "@html-eslint/parser"; // HTML+JS対応パーサー
 
 export default [
-    js.configs.recommended, // 推奨ルール（旧: "extends": "eslint:recommended" の代わり）
-
+    js.configs.recommended, // JS基本ルールを読み込み
     {
-        files: ["**/*.js", "**/*.mjs"], // 対象ファイル
+        files: ["**/*.html"], // HTMLファイル対象
         languageOptions: {
-            sourceType: "module",
-            ecmaVersion: "latest",
+            parser, // ← HTMLを読むパーサーを指定
+            ecmaVersion: "latest", // 最新JS構文対応
+            sourceType: "script", // import/exportなしの通常スクリプト
         },
+        plugins: { "@html-eslint": html }, // HTML用ルールを有効化
         rules: {
-            "no-unused-vars": "warn",
-            "no-console": "off",
+            "@html-eslint/indent": ["error", 2], // インデント2スペース
+            "@html-eslint/no-duplicate-attrs": "error", // 属性の重複禁止
+            "no-console": "warn", // console.logを警告
+            "eqeqeq": "error", // ==禁止、===推奨
         },
     },
 ];

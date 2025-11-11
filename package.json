@@ -1,5 +1,6 @@
 {
   "name": "eslint-lab",
+  "type": "module",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,11 +11,12 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "@html-eslint/eslint-plugin": "^0.48.0",
     "@html-eslint/parser": "^0.48.0",
     "eslint": "^9.39.1"
   },
   "dependencies": {
-    "@eslint/js": "^9.39.1"
+    "eslint-plugin-html": "^8.1.3"
   }
 }
